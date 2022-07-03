@@ -11,7 +11,9 @@ import { createWalletFromFile } from '../../shared/wallet';
 export default class Broadcast extends Command {
   static description = 'Command sends messages to multiples accounts';
 
-  static examples = ['<%= config.bin %> <%= command.id %>'];
+  static examples = [
+    '<%= config.bin %> <%= command.id %>  -t "message title" -m "message title"',
+  ];
 
   static flags = {
     title: Flags.string({
