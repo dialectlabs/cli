@@ -26,7 +26,6 @@ export default class Broadcast extends Command {
       description: 'Message to send',
       required: true,
     }),
-    mode: modeFlag,
     keypair: keypairFlag,
     env: envFlag,
   };
@@ -36,21 +35,11 @@ export default class Broadcast extends Command {
   public async run(): Promise<void> {
     const { flags } = await this.parse(Broadcast);
 
-    const backends = [];
-    if (flags.mode === 'cloud') {
-      backends.push(Backend.DialectCloud);
-    }
-
-    if (flags.mode === 'solana') {
-      backends.push(Backend.Solana);
-    }
-
     const wallet = await createWalletFromFile(flags.keypair!);
 
     const sdk = Dialect.sdk({
       wallet,
       environment: sdkEnvFromEnvFlag(flags.env),
-      backends: backends,
     });
 
     const dapp = await sdk.dapps.find();
