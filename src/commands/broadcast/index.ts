@@ -2,6 +2,7 @@ import { Dialect } from '@dialectlabs/sdk';
 import { CliUx, Command, Flags } from '@oclif/core';
 import { envFlag, keypairFlag, sdkEnvFromEnvFlag } from '../../shared/flags';
 import { createWalletFromFile } from '../../shared/wallet';
+import { getUniqueUsers } from './utils';
 
 export default class Broadcast extends Command {
   static description = 'Command broadcasts message to dapp subscribers';
@@ -48,7 +49,9 @@ export default class Broadcast extends Command {
 
     CliUx.ux.action.start('fetching addresses');
 
-    const addresses = await dapp.dappAddresses.findAll();
+    const addresses = (await dapp.dappAddresses.findAll()).filter(
+      (addr) => addr.enabled && addr.address.verified,
+    );
 
     CliUx.ux.action.stop(`found ${addresses.length} addresses`);
 
@@ -56,11 +59,13 @@ export default class Broadcast extends Command {
       return;
     }
 
+    const uniqueUsers = getUniqueUsers(addresses);
+
     const confirmed = await CliUx.ux.confirm(
       `Message preview: 
 ${flags.title}
 ${flags.message}
-to ${addresses.length} addresses? [y/n]`,
+to ${uniqueUsers.length} users having ${addresses.length} addresses? [y/n]`,
     );
 
     if (!confirmed) {
