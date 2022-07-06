@@ -1,18 +1,13 @@
-import { Backend, Dialect } from '@dialectlabs/sdk';
+import { Dialect } from '@dialectlabs/sdk';
 import { CliUx, Command, Flags } from '@oclif/core';
-import {
-  envFlag,
-  keypairFlag,
-  modeFlag,
-  sdkEnvFromEnvFlag,
-} from '../../shared/flags';
+import { envFlag, keypairFlag, sdkEnvFromEnvFlag } from '../../shared/flags';
 import { createWalletFromFile } from '../../shared/wallet';
 
 export default class Broadcast extends Command {
-  static description = 'Command sends messages to multiples accounts';
+  static description = 'Command broadcasts message to dapp subscribers';
 
   static examples = [
-    '<%= config.bin %> <%= command.id %>  -t "message title" -m "message title"',
+    '<%= config.bin %> <%= command.id %>  -t "message title" -m "message title" -k key.json',
   ];
 
   static flags = {
