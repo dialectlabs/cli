@@ -21,7 +21,7 @@
     "@oclif/core": "^1.9.5",
     "@oclif/plugin-help": "^5",
     "@oclif/plugin-plugins": "^2.1.0",
-    "@solana/web3.js": "^1.47.1",
+    "@solana/web3.js": "^1.50.1",
     "lodash": "^4.17.21"
   },
   "devDependencies": {
