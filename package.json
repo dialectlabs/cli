@@ -18,7 +18,7 @@
   ],
   "dependencies": {
     "@dialectlabs/sdk": "^0.2.0",
-    "@oclif/core": "^1.9.5",
+    "@oclif/core": "^1.16.4",
     "@oclif/plugin-help": "^5",
     "@oclif/plugin-plugins": "^2.1.0",
     "@solana/web3.js": "^1.47.1",
